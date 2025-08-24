@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot name="xarm_lite">
+  <link name="base_link"/>
+  <joint name="base_to_arm" type="fixed">
+    <parent link="base_link"/>
+    <child link="arm_base"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name="arm_base">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+  </link>
+  <!-- Placeholder for full arm kinematics and extruder -->
+</robot>
