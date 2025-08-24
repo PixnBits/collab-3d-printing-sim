@@ -1,0 +1,83 @@
+<sdf version="1.7">
+  <world name="print_world">
+    <!-- Ground plane -->
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="ground_link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Print bed (200mm x 200mm x 5mm) -->
+    <model name="print_bed">
+      <static>true</static>
+      <pose>0 0 0.0025 0 0 0</pose>
+      <link name="bed_link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.005</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.2 0.2 0.005</size>
+            </box>
+          </geometry>
+          <material>
+            <diffuse>0.2 0.2 0.2 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Robotic arm 1 (xArm Lite) -->
+    <include>
+      <uri>model://xarm_lite</uri>
+      <name>xarm_lite_1</name>
+      <pose>0.3 0 0 0 0 1.57</pose>
+    </include>
+
+    <!-- Robotic arm 2 (xArm Lite) -->
+    <include>
+      <uri>model://xarm_lite</uri>
+      <name>xarm_lite_2</name>
+      <pose>-0.15 0.26 0 0 0 -0.52</pose>
+    </include>
+
+    <!-- Robotic arm 3 (xArm Lite) -->
+    <include>
+      <uri>model://xarm_lite</uri>
+      <name>xarm_lite_3</name>
+      <pose>-0.15 -0.26 0 0 0 -2.62</pose>
+    </include>
+
+    <!-- Light source for visibility -->
+    <light type="directional" name="sun">
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+  </world>
+</sdf>
