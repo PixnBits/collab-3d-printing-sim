@@ -1,0 +1,44 @@
+name: CI - Docker Build and Simulation Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: |
+          make build
+        env:
+          IMAGE_NAME: collab-3d-printing-sim
+
+      - name: Run Docker container and test simulation
+        run: |
+          docker run --rm \
+            --name collab_3d_printing_container \
+            --env="DISPLAY=:0" \
+            --volume="${{ github.workspace }}/ws:/root/collab_3d_printing_ws" \
+            collab-3d-printing-sim bash -c "\
+              source /opt/ros/humble/setup.bash && \
+              cd /root/collab_3d_printing_ws && \
+              colcon build --symlink-install && \
+              source install/setup.bash && \
+              ros2 launch multi_arm_sim simulation.launch.py --show-args"  # Use --show-args for testing without full Gazebo launch to avoid GUI issues in CI
+
+      - name: Upload build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: ws/build/**/*.log
