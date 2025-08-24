@@ -1,0 +1,21 @@
+# Ignore ROS 2 build artifacts
+ws/build/
+ws/install/
+ws/log/
+
+# Ignore Docker artifacts
+*.tar
+*.tar.gz
+
+# Ignore temporary files
+*.swp
+*.swo
+*.tmp
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+
+# Ignore Docker
+Dockerfile
+.dockerignore
