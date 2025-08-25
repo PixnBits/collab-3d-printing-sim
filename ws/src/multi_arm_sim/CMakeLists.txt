@@ -6,11 +6,10 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
-find_package(ros2 REQUIRED)
 find_package(gazebo_ros REQUIRED)
 find_package(moveit REQUIRED)
 
-install(DIRECTORY launch urdf
+install(DIRECTORY launch urdf worlds config
   DESTINATION share/${PROJECT_NAME}/
 )
 

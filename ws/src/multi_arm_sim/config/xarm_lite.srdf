@@ -1,0 +1,15 @@
+
+<?xml version="1.0" ?>
+<robot name="xarm_lite">
+  <group name="arm">
+    <chain base_link="arm_base" tip_link="end_effector" />
+  </group>
+  <group_state name="home" group="arm">
+    <joint name="shoulder_joint" value="0" />
+    <joint name="elbow_joint" value="0" />
+    <joint name="wrist_joint" value="0" />
+  </group_state>
+  <end_effector name="extruder_ee" parent_link="end_effector" group="arm" />
+  <disable_collisions src="arm_base" dest="shoulder" reason="Adjacent" />
+  <!-- Add more as needed -->
+</robot>
